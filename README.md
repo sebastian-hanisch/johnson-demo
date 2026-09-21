@@ -1,5 +1,7 @@
 # Johnson – Umgewichten statt neu erfinden – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-johnson-demo.streamlit.app/)**
+
 Siebtes Stück der **Kürzeste-Wege-Linie** der "Konzepte"-Reihe für die Website "Sebastian Hanisch – Operations Research und Machine Learning", **Konvergenz** von [Bellman-Ford](../bellman-ford-demo) und [Floyd-Warshall](../floyd-warshall-demo):
 anders als die Fall-Demos im Portfolio (ein Anwendungsfall, mehrere Verfahren im Vergleich) zeigt diese Demo **ein** Verfahren – **Johnson** – an einem wachsenden Beispiel.
 **Einmal Bellman-Ford** (ab einem Hilfsknoten *q*) berechnet **Potenziale** *h*; mit ihnen wird jede Kante umgewichtet, *c′(u,v) = c(u,v) + h(u) − h(v) ≥ 0*. Danach darf **n-mal Dijkstra** laufen, und das Ergebnis wird zurückgerechnet: *d(s,t) = d′(s,t) − h(s) + h(t)*.
