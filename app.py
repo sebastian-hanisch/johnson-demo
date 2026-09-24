@@ -23,6 +23,7 @@ from jo_presets import (
     init_session_state_defaults,
     load_permalink_settings,
     randomize_seed,
+    seed_widget,
     sync_query_params,
 )
 from jo_scenario import make_network
@@ -139,31 +140,39 @@ with st.sidebar:
         help="Klein und fest (Liefernetz mit einer negativen Kante, dasselbe mit negativem Zyklus) oder erzeugt (E-Lieferwagen mit Rekuperation, Zufallsnetz mit Potenzialen, Stadtnetz ohne negative Kanten). Alle Kosten sind ganze Zahlen; höchstens 400 Knoten.",
     )
     if net_key in C.SIZED_NETS:
+        seed_widget("side_slider")
         side = st.slider("Kreuzungen je Seite", *bounds("side_slider"), key="side_slider", help="Größe des Rasters: n = Seite² Knoten.")
         st.session_state[KEPT["side_slider"]] = side
     else:
         side = int(st.session_state.get(KEPT["side_slider"], C.DEFAULT_SIDE))
     if net_key == "ev":
+        seed_widget("hill_slider")
         hill = st.slider("Hügel [m Höhenunterschied]", *bounds("hill_slider"), key="hill_slider", help="Höhenunterschied zwischen Tal und Spitze: je höher, desto mehr negative Kanten (bei 0 m gibt es keine).")
         st.session_state[KEPT["hill_slider"]] = hill
+        seed_widget("eta_slider")
         eta = st.slider("Rückgewinnung bergab [%]", *bounds("eta_slider"), key="eta_slider", help="Wie viel Lageenergie der Wagen beim Bergabfahren zurückgewinnt. Unter 100 % entsteht nie ein negativer Zyklus.")
         st.session_state[KEPT["eta_slider"]] = eta
     else:
         hill = int(st.session_state.get(KEPT["hill_slider"], C.DEFAULT_HILL))
         eta = int(st.session_state.get(KEPT["eta_slider"], C.DEFAULT_ETA))
     if net_key == "city":
+        seed_widget("reach_slider")
         reach = st.slider("Reichweite der Straßen [Blocklängen]", *bounds("reach_slider"), key="reach_slider", step=0.1, help="Wie weit eine Straße zwischen zwei Kreuzungen reichen darf (1 = nur Nachbarn im Raster).")
         st.session_state[KEPT["reach_slider"]] = reach
+        seed_widget("spread_slider")
         spread = st.slider("Streuung der Kosten", *bounds("spread_slider"), key="spread_slider", step=0.25, help="Kosten einer Straße = Länge × (1 + Streuung × Zufall), gerundet auf ganze Meter.")
         st.session_state[KEPT["spread_slider"]] = spread
     else:
         reach = float(st.session_state.get(KEPT["reach_slider"], C.DEFAULT_REACH))
         spread = float(st.session_state.get(KEPT["spread_slider"], C.DEFAULT_SPREAD))
     if net_key == "random":
+        seed_widget("nodes_slider")
         nodes = st.slider("Knoten", *bounds("nodes_slider"), key="nodes_slider", step=10, help="Anzahl der Knoten n.")
         st.session_state[KEPT["nodes_slider"]] = nodes
+        seed_widget("degree_slider")
         degree = st.slider("Mittlerer Grad", *bounds("degree_slider"), key="degree_slider", step=0.5, help="Kanten je Knoten (ausgehend). Je dichter das Netz, desto mehr Arbeit haben die n Läufe von Dijkstra - und desto näher rückt Floyd-Warshall (im vollständigen Netz gleichauf).")
         st.session_state[KEPT["degree_slider"]] = degree
+        seed_widget("pot_slider")
         pot = st.slider("Potenzialspanne", *bounds("pot_slider"), key="pot_slider",
                         help="Kosten = 1 bis 9 plus Potenzial(Start) − Potenzial(Ziel), Potenziale zufällig zwischen 0 und dieser Spanne. Je größer, desto mehr negative Kanten - nie ein negativer Zyklus. 0 = keine negativen Kanten.")
         st.session_state[KEPT["pot_slider"]] = pot
@@ -175,12 +184,14 @@ with st.sidebar:
                           help="Johnson: Potenziale aus Bellman-Ford ab q, das Ergebnis ist exakt. Falle: statt der Potenziale alle Kosten um |kleinster Wert| anheben und n-mal Dijkstra rechnen - die gefundenen Routen sind oft nicht die billigsten. "
                                "Ohne negative Kanten sind beide dasselbe.")
     if net_key not in C.SMALL_NETS:
+        seed_widget("distance_slider")
         distance = st.slider("Entfernung Start–Ziel [%]", *bounds("distance_slider"), key="distance_slider",
                              help="Welches Paar die Ansicht zeigt: das Ziel ist der Knoten, dessen Entfernung vom Start in der Rangfolge aller erreichbaren Knoten bei diesem Prozentwert liegt (100 = der am weitesten entfernte). Die Rechnung enthält alle Paare.")
         st.session_state[KEPT["distance_slider"]] = distance
     else:
         distance = int(st.session_state.get(KEPT["distance_slider"], C.DEFAULT_DISTANCE))
     if net_key in ("city", "ev", "random"):
+        seed_widget("seed_input")
         seed = st.number_input("Zufalls-Seed", *bounds("seed_input"), key="seed_input", step=1)
         st.session_state[KEPT["seed_input"]] = seed
         st.button("🎲 Neues Netz generieren", width="stretch", on_click=randomize_seed, help="Würfelt einen neuen Zufalls-Seed für das Netz.")
