@@ -403,7 +403,7 @@ st.markdown(
 """
 )
 st.caption("Verwandtes aus der Literatur (hier nicht gebaut): dieselben \"reduzierten Kosten\" $c + h(u) - h(v) \\ge 0$ stehen hinter A* mit konsistenter Heuristik und hinter der Ungarischen Methode. "
-           "Die Nachbarn der Kürzeste-Wege-Linie: Mehrkriterien-Routing (noch nicht gebaut). Bereits gebaut: Breitensuche, Dijkstra, bidirektionale Suche, Contraction Hierarchies, Bellman-Ford und Floyd-Warshall.")
+           "Die Nachbarn der Kürzeste-Wege-Linie: Mehrkriterien-Routing (gebaut). Ebenfalls gebaut: Breitensuche, Dijkstra, bidirektionale Suche, Contraction Hierarchies, Bellman-Ford und Floyd-Warshall.")
 
 st.markdown("---")
 
@@ -432,6 +432,6 @@ st.markdown("---")
 
 st.caption(
     "Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – "
-    "Operations Research und Machine Learning. Interesse an einer maßgeschneiderten Lösung für "
-    "Ihr Unternehmen? [Kontakt aufnehmen](https://sebastianhanisch.net/kontakt.html)"
+    "Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). "
+    "Mehr zur Reihe: [Kürzeste Wege: von der Breitensuche bis RAPTOR](https://sebastianhanisch.net/konzepte-kuerzeste-wege.html)."
 )

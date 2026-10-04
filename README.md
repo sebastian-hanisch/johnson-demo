@@ -14,7 +14,7 @@ bfs-demo (Wurzel: Kanten zählen, nicht Kosten)                                 
        ├─ bidirectional-demo → contraction-hierarchies-demo                          [gebaut]
        ├─ bellman-ford-demo ─┐                                                       [gebaut]
        │   floyd-warshall-demo ─┴→ johnson-demo (Konvergenz: Umgewichtung)           [dieses Stück]
-       └─ Mehrkriterien-Routing (Zeit gegen CO₂, Pareto)                             [nicht gebaut]
+       └─ multicriteria-demo (Zeit gegen CO₂, Pareto)                                [gebaut]
 ```
 
 ## Quellen
@@ -75,3 +75,7 @@ streamlit run app.py
 ```
 
 Tests: `pip install -r requirements-dev.txt` und `python -m pytest tests/`. Jede Zahl in Hilfetexten, Presets und Tabellen ist in `tests/test_claims.py` belegt; die Kreuzprobe läuft gegen networkx (`floyd_warshall_numpy`, `negative_edge_cycle`) und Floyd-Warshall auf Netzen mit und ohne negative Kanten und Zyklen, mit unerreichbaren Paaren, Nullkanten und einem einzelnen Knoten; ein Regressionstest klickt "▶️ Abspielen" auf Netzen mit mehreren Bildern.
+
+---
+
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Kürzeste Wege: von der Breitensuche bis RAPTOR](https://sebastianhanisch.net/konzepte-kuerzeste-wege.html).
