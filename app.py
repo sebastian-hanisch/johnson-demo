@@ -402,7 +402,7 @@ st.markdown(
 | **Nur eine Kostenart** | Zeit gegen Energie gleichzeitig ist ein anderes Problem. | **Mehrkriterien-Routing** |
 """
 )
-st.caption("Verwandtes aus der Literatur (hier nicht gebaut): dieselben \"reduzierten Kosten\" $c + h(u) - h(v) \\ge 0$ stehen hinter A* mit konsistenter Heuristik und hinter der Ungarischen Methode. "
+st.caption("Verwandtes aus der Literatur (in dieser Demo nicht gebaut; A* und die Ungarische Methode gibt es als eigene Demos im Portfolio): dieselben \"reduzierten Kosten\" $c + h(u) - h(v) \\ge 0$ stehen hinter A* mit konsistenter Heuristik und hinter der Ungarischen Methode. "
            "Die Nachbarn der Kürzeste-Wege-Linie: Mehrkriterien-Routing (gebaut). Ebenfalls gebaut: Breitensuche, Dijkstra, bidirektionale Suche, Contraction Hierarchies, Bellman-Ford und Floyd-Warshall.")
 
 st.markdown("---")
